@@ -1,17 +1,21 @@
 import "../globals.css"
 import {SafeAreaView} from "react-native-safe-area-context";
-import {FlatList, Image, Pressable, ScrollView, Text, TouchableOpacity, View} from "react-native";
-import {images, offers} from "@/constants";
+import {Button, FlatList, Image, Pressable, ScrollView, Text, TouchableOpacity, View} from "react-native";
 import {Fragment} from "react";
 import cn from "clsx";
+import {images, offers} from "@/constants";
 import CartButton from "@/components/CartButton";
+import * as Sentry from "@sentry/react-native";
+import useAuthStore from "@/store/auth.store";
 
 export default function Index() {
+    const {user} = useAuthStore();
+
     return (
    <SafeAreaView className='flex-1 bg-white'>
 
         <FlatList data={offers} renderItem={({item, index})=> {
-            const isEven = index%2==0;
+            const isEven = index%2===0;
             return(
                 <View>
                     <Pressable className={cn("offer-card", isEven? 'flex-row-reverse': 'flex-row')}
@@ -23,7 +27,7 @@ export default function Index() {
                         {({pressed})=>(
                             <Fragment>
                                 <View className="h-full w-1/2">
-                                    <Image source={item.image} className={"size-full"} resizeMode={"contain"} />
+                                    <Image source={item.image} className="size-full" resizeMode="contain" />
                                 </View>
                                 <View className={cn("offer-card__info", isEven ? 'pl-10' : 'pr-10')}>
                                     <Text className={"h1-bold text-white leading-tight"}>
@@ -60,6 +64,7 @@ export default function Index() {
                           </Text>
                       </View>
                   )}
+
         />
    </SafeAreaView>
     );
