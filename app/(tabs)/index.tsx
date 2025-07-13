@@ -29,7 +29,7 @@ export default function Index() {
                                 <View className="h-full w-1/2">
                                     <Image source={item.image} className="size-full" resizeMode="contain" />
                                 </View>
-                                <View className={cn("offer-card__info", isEven ? 'pl-10' : 'pr-10')}>
+                                <View className={cn("offer-card__info", isEven ? 'pl-9' : 'pr-8')}>
                                     <Text className={"h1-bold text-white leading-tight"}>
                                         {item.title}
                                     </Text>
